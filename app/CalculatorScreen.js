@@ -9,12 +9,16 @@ import {
   ScrollView
 } from 'react-native';
 import StatusBar from './components/StatusBar'
+import Calculation from './calculation/Calculation'
 
 export default class CalculatorScreen extends Component {
 
   constructor(props) {
-    super(props);
-    this.conduction = "33 - 4"
+    super(props)
+    this.calc = new Calculation()
+    this.state = {
+         text: this.calc.text
+      }
   }
 
   render() {
@@ -23,14 +27,16 @@ export default class CalculatorScreen extends Component {
         <StatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Text style={styles.appBar}>Калькулятор</Text>
         <View style={styles.content} >
-          <Text style={styles.textInput}>{this.conduction}</Text>
+          <Text style={styles.textInput}>{this.state.text}</Text>
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonClear.bind(this)}>
               <Text style={styles.buttonText}>C</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressRemoveLast.bind(this)}>
               <Text style={styles.buttonText}>&larr;</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
@@ -44,15 +50,21 @@ export default class CalculatorScreen extends Component {
           </View>
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton7.bind(this)}
+                >
               <Text style={styles.buttonText}>7</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton8.bind(this)}
+                >
               <Text style={styles.buttonText}>8</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton9.bind(this)}
+                >
               <Text style={styles.buttonText}>9</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
@@ -62,15 +74,21 @@ export default class CalculatorScreen extends Component {
           </View>
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton4.bind(this)}
+                >
               <Text style={styles.buttonText}>4</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton5.bind(this)}
+                >
               <Text style={styles.buttonText}>5</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton6.bind(this)}
+                >
               <Text style={styles.buttonText}>6</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
@@ -80,15 +98,21 @@ export default class CalculatorScreen extends Component {
           </View>
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton1.bind(this)}
+                >
               <Text style={styles.buttonText}>1</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton2.bind(this)}
+                >
               <Text style={styles.buttonText}>2</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton3.bind(this)}
+                >
               <Text style={styles.buttonText}>3</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
@@ -98,11 +122,15 @@ export default class CalculatorScreen extends Component {
           </View>
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton00.bind(this)}
+                >
               <Text style={styles.buttonText}>00</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButton0.bind(this)}
+                >
               <Text style={styles.buttonText}>0</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
@@ -118,6 +146,67 @@ export default class CalculatorScreen extends Component {
       </ScrollView>
     );
   }
+
+  onPressButton9() {
+    this.addValue(9)
+  }
+
+  addValue(value) {
+    this.calc.addValue(value)
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButton8() {
+    this.addValue(8)
+  }
+
+  onPressButton7() {
+    this.addValue(7)
+  }
+
+  onPressButton6() {
+    this.addValue(6)
+  }
+
+  onPressButton5() {
+    this.addValue(5)
+  }
+
+  onPressButton4() {
+    this.addValue(4)
+  }
+
+  onPressButton3() {
+    this.addValue(3)
+  }
+
+  onPressButton2() {
+    this.addValue(2)
+  }
+
+  onPressButton1() {
+    this.addValue(1)
+  }
+
+  onPressButton0() {
+    this.addValue(0)
+  }
+
+  onPressButton00() {
+    this.addValue(0)
+    this.addValue(0)
+  }
+
+  onPressButtonClear() {
+    this.calc.clear()
+    this.setState({text: this.calc.text})
+  }
+
+  onPressRemoveLast() {
+    this.calc.removeLast()
+    this.setState({text: this.calc.text})
+  }
+
 }
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
@@ -143,6 +232,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     fontSize: 30,
+    height: 46,
     padding: 4
   },
   header: {
