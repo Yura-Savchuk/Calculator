@@ -13,6 +13,7 @@ import Calculation from './calculation/Calculation'
 import OperationAddition from './calculation/OperationAddition'
 import OperationSub from './calculation/OperationSub'
 import OperationMultiplication from './calculation/OperationMultiplication'
+import OperationDivide from './calculation/OperationDivide'
 
 export default class CalculatorScreen extends Component {
 
@@ -47,7 +48,8 @@ export default class CalculatorScreen extends Component {
               <Text style={styles.buttonText}>%</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonDivide.bind(this)}>
               <Text style={styles.buttonText}>&divide;</Text>
             </TouchableHighlight>
           </View>
@@ -226,6 +228,11 @@ export default class CalculatorScreen extends Component {
 
   onPressButtonMultiplication() {
     this.calc.setOperand(new OperationMultiplication())
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButtonDivide() {
+    this.calc.setOperand(new OperationDivide())
     this.setState({text: this.calc.text})
   }
 
