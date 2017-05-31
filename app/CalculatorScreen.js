@@ -143,7 +143,8 @@ export default class CalculatorScreen extends Component {
               <Text style={styles.buttonText}>0</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonPoint.bind(this)}>
               <Text style={styles.buttonText}>.</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonEquals}
@@ -239,6 +240,11 @@ export default class CalculatorScreen extends Component {
 
   onPressButtonPercent() {
     this.calc.definePercent()
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButtonPoint() {
+    this.calc.addPointToValue()
     this.setState({text: this.calc.text})
   }
 

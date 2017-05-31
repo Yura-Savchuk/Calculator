@@ -1,6 +1,7 @@
 import React from "react"
 import Operand from './Operand'
 import CalcValueUtil from './CalcValueUtil'
+import Value from './Value'
 
 const EMPTY_STRING = "0"
 
@@ -15,7 +16,7 @@ export default class Calculation {
   }
 
   addValue(value) {
-    if (this.result != null) this.clear()
+    this.setResultToLeftValueIfExist()
     if (this.operand == null) {
       this.addLeftValue(value)
     } else {
@@ -24,20 +25,28 @@ export default class Calculation {
     this.refreshText()
   }
 
+  setResultToLeftValueIfExist() {
+    if (this.result != null) {
+      var value = this.result
+      this.clear()
+      this.leftValue = new Value(value)
+    }
+  }
+
   addLeftValue(value) {
-    var strValue = CalcValueUtil.intToString(this.leftValue)
-    console.log("Old value: " + strValue);
-    strValue += value
-    this.leftValue = CalcValueUtil.stringToInt(strValue)
-    console.log("New value: " + this.leftValue);
+    if (this.leftValue == null) {
+      this.leftValue = new Value(value)
+    } else {
+      this.leftValue.addDigit(value)
+    }
   }
 
   addRightValue(value) {
-    var strValue = CalcValueUtil.intToString(this.rightValue)
-    console.log("Old value: " + strValue);
-    strValue += value
-    this.rightValue = CalcValueUtil.stringToInt(strValue)
-    console.log("New value: " + this.rightValue);
+    if (this.rightValue == null) {
+      this.rightValue = new Value(value)
+    } else {
+      this.rightValue.addDigit(value)
+    }
   }
 
   refreshText() {
@@ -80,27 +89,15 @@ export default class Calculation {
   }
 
   removeLastFromRightValue() {
-    var strValue = CalcValueUtil.intToString(this.rightValue)
-    console.log("Old value: " + strValue);
-    if (strValue.length <= 1) {
+    if (!this.rightValue.removeLast()) {
       this.rightValue = null
-      return
     }
-    strValue = strValue.substring(0, strValue.length-1)
-    this.rightValue = CalcValueUtil.stringToInt(strValue)
-    console.log("New value: " + this.rightValue);
   }
 
   removeLastFromLeftValue() {
-    var strValue = CalcValueUtil.intToString(this.leftValue)
-    console.log("Old value: " + strValue);
-    if (strValue.length <= 1) {
+    if (!this.leftValue.removeLast()) {
       this.leftValue = null
-      return
     }
-    strValue = strValue.substring(0, strValue.length-1)
-    this.leftValue = CalcValueUtil.stringToInt(strValue)
-    console.log("New value: " + this.leftValue);
   }
 
   setOperand(operand) {
@@ -110,13 +107,25 @@ export default class Calculation {
 
   definePercent() {
     if (this.leftValue == null && this.result == null) return
+    var numberValue = this.leftValue.amount
     if (this.result != null) {
-      this.leftValue = this.result
+      numberValue = this.result
       this.result = null
     }
-    this.leftValue /= 100
+    this.leftValue = new Value(numberValue/100)
     this.rightValue = null
     this.operand = null
+    this.refreshText()
+  }
+
+  addPointToValue() {
+    this.setResultToLeftValueIfExist()
+    if (this.rightValue != null) {
+      this.rightValue.addPoint()
+    } else {
+      if (this.leftValue == null) this.leftValue = new Value(0)
+      this.leftValue.addPoint()
+    }
     this.refreshText()
   }
 
