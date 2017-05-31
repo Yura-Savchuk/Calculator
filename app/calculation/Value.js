@@ -29,14 +29,15 @@ export default class Value {
   removeLast() {
     if (this.pendingPoint) {
       this.pendingPoint = false
-      return false
+      return true
     }
     var strAmount = CalcValueUtil.numberToString(this.amount)
-    if (strValue.length <= 1) {
+    if (strAmount.length <= 1) {
       return false
     }
-    strValue = strValue.substring(0, strValue.length-1)
-    this.amount = CalcValueUtil.stringToFloat(strValue)
+    strAmount = strAmount.substring(0, strAmount.length-1)
+    this.amount = CalcValueUtil.stringToFloat(strAmount)
+    return true
   }
 
   toString() {
