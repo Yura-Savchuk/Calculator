@@ -44,7 +44,8 @@ export default class CalculatorScreen extends Component {
               <Text style={styles.buttonText}>&larr;</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonPercent.bind(this)}>
               <Text style={styles.buttonText}>%</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
@@ -233,6 +234,11 @@ export default class CalculatorScreen extends Component {
 
   onPressButtonDivide() {
     this.calc.setOperand(new OperationDivide())
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButtonPercent() {
+    this.calc.definePercent()
     this.setState({text: this.calc.text})
   }
 

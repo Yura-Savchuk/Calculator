@@ -108,6 +108,18 @@ export default class Calculation {
     this.refreshText()
   }
 
+  definePercent() {
+    if (this.leftValue == null && this.result == null) return
+    if (this.result != null) {
+      this.leftValue = this.result
+      this.result = null
+    }
+    this.leftValue /= 100
+    this.rightValue = null
+    this.operand = null
+    this.refreshText()
+  }
+
   countResult() {
     if (this.leftValue == null || this.rightValue == null || this.operand == null) {
       return
