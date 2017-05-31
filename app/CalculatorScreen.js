@@ -11,6 +11,7 @@ import {
 import StatusBar from './components/StatusBar'
 import Calculation from './calculation/Calculation'
 import OperationAddition from './calculation/OperationAddition'
+import OperationSub from './calculation/OperationSub'
 
 export default class CalculatorScreen extends Component {
 
@@ -93,7 +94,8 @@ export default class CalculatorScreen extends Component {
               <Text style={styles.buttonText}>6</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonSub.bind(this)}>
               <Text style={styles.buttonText}>-</Text>
             </TouchableHighlight>
           </View>
@@ -212,6 +214,11 @@ export default class CalculatorScreen extends Component {
 
   onPressButtonAddition() {
     this.calc.setOperand(new OperationAddition())
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButtonSub() {
+    this.calc.setOperand(new OperationSub())
     this.setState({text: this.calc.text})
   }
 
