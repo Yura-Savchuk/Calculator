@@ -3,11 +3,11 @@ import React from "react"
 export default class Operand {
 
   calculate(calculation) {
-
+    throw "This method must be ovvriden"
   }
 
   asString() {
-    return "DummyOperand"
+    throw "This method must be ovvriden"
   }
 
 }

@@ -15,26 +15,13 @@ export default class Calculation {
   }
 
   addValue(value) {
+    if (this.result != null) this.clear()
     if (this.operand == null) {
       this.addLeftValue(value)
     } else {
       this.addRightValue(value)
     }
     this.refreshText()
-
-
-
-    // if (this.leftValue == null) {
-    //   this.leftValue = value
-    //   this.refreshText()
-    //   console.log(this.text)
-    //   return
-    // }
-    // if (this.rightValue == null && this.operand != null) {
-    //   this.rightValue = value
-    //   this.refreshText()
-    // }
-    // console.log(this.text)
   }
 
   addLeftValue(value) {
@@ -45,7 +32,19 @@ export default class Calculation {
     console.log("New value: " + this.leftValue);
   }
 
+  addRightValue(value) {
+    var strValue = CalcValueUtil.intToString(this.rightValue)
+    console.log("Old value: " + strValue);
+    strValue += value
+    this.rightValue = CalcValueUtil.stringToInt(strValue)
+    console.log("New value: " + this.rightValue);
+  }
+
   refreshText() {
+    if (this.result != null) {
+      this.text = this.result.toString()
+      return
+    }
     if (this.leftValue == null) {
       this.text = EMPTY_STRING
       return
@@ -102,6 +101,19 @@ export default class Calculation {
     strValue = strValue.substring(0, strValue.length-1)
     this.leftValue = CalcValueUtil.stringToInt(strValue)
     console.log("New value: " + this.leftValue);
+  }
+
+  setOperand(operand) {
+    this.operand = operand
+    this.refreshText()
+  }
+
+  countResult() {
+    if (this.leftValue == null || this.rightValue == null || this.operand == null) {
+      return
+    }
+    this.result = this.operand.calculate(this)
+    this.refreshText()
   }
 
 }

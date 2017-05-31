@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import StatusBar from './components/StatusBar'
 import Calculation from './calculation/Calculation'
+import OperationAddition from './calculation/OperationAddition'
 
 export default class CalculatorScreen extends Component {
 
@@ -116,7 +117,8 @@ export default class CalculatorScreen extends Component {
               <Text style={styles.buttonText}>3</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonRight}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonAddition.bind(this)}>
               <Text style={styles.buttonText}>+</Text>
             </TouchableHighlight>
           </View>
@@ -138,7 +140,8 @@ export default class CalculatorScreen extends Component {
               <Text style={styles.buttonText}>.</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonEquals}
-                underlayColor='#99d9f4'>
+                underlayColor='#99d9f4'
+                onPress={this.onPressButtonCountResult.bind(this)}>
               <Text style={styles.buttonText}>=</Text>
             </TouchableHighlight>
           </View>
@@ -156,7 +159,7 @@ export default class CalculatorScreen extends Component {
     this.setState({text: this.calc.text})
   }
 
-  onPressButton8() {
+  onPressButton8(comp) {
     this.addValue(8)
   }
 
@@ -204,6 +207,16 @@ export default class CalculatorScreen extends Component {
 
   onPressRemoveLast() {
     this.calc.removeLast()
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButtonAddition() {
+    this.calc.setOperand(new OperationAddition())
+    this.setState({text: this.calc.text})
+  }
+
+  onPressButtonCountResult() {
+    this.calc.countResult()
     this.setState({text: this.calc.text})
   }
 
