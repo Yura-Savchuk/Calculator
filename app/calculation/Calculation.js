@@ -101,6 +101,7 @@ export default class Calculation {
   }
 
   setOperand(operand) {
+    this.setResultToLeftValueIfExist()
     this.operand = operand
     this.refreshText()
   }
