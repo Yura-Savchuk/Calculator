@@ -57,19 +57,19 @@ export default class CalculatorScreen extends Component {
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton7.bind(this)}
+                onPress={() => this.onPressNumberButton(7)}
                 >
               <Text style={styles.buttonText}>7</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton8.bind(this)}
+                onPress={() => this.onPressNumberButton(8)}
                 >
               <Text style={styles.buttonText}>8</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton9.bind(this)}
+                onPress={() => this.onPressNumberButton(9)}
                 >
               <Text style={styles.buttonText}>9</Text>
             </TouchableHighlight>
@@ -82,19 +82,19 @@ export default class CalculatorScreen extends Component {
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton4.bind(this)}
+                onPress={() => this.onPressNumberButton(4)}
                 >
               <Text style={styles.buttonText}>4</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton5.bind(this)}
+                onPress={() => this.onPressNumberButton(5)}
                 >
               <Text style={styles.buttonText}>5</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton6.bind(this)}
+                onPress={() => this.onPressNumberButton(6)}
                 >
               <Text style={styles.buttonText}>6</Text>
             </TouchableHighlight>
@@ -107,19 +107,19 @@ export default class CalculatorScreen extends Component {
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton1.bind(this)}
+                onPress={() => this.onPressNumberButton(1)}
                 >
               <Text style={styles.buttonText}>1</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton2.bind(this)}
+                onPress={() => this.onPressNumberButton(2)}
                 >
               <Text style={styles.buttonText}>2</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton3.bind(this)}
+                onPress={() => this.onPressNumberButton(3)}
                 >
               <Text style={styles.buttonText}>3</Text>
             </TouchableHighlight>
@@ -132,13 +132,16 @@ export default class CalculatorScreen extends Component {
           <View style={styles.buttonsRow}>
             <TouchableHighlight style={styles.buttonLeft}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton00.bind(this)}
+                onPress={() => {
+                  this.onPressNumberButton(0)
+                  this.onPressNumberButton(0)
+                }}
                 >
               <Text style={styles.buttonText}>00</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.button}
                 underlayColor='#99d9f4'
-                onPress={this.onPressButton0.bind(this)}
+                onPress={() => this.onPressNumberButton(0)}
                 >
               <Text style={styles.buttonText}>0</Text>
             </TouchableHighlight>
@@ -158,54 +161,9 @@ export default class CalculatorScreen extends Component {
     );
   }
 
-  onPressButton9() {
-    this.addValue(9)
-  }
-
-  addValue(value) {
-    this.calc.addValue(value)
+  onPressNumberButton(number) {
+    this.calc.addValue(number)
     this.setState({text: this.calc.text})
-  }
-
-  onPressButton8(comp) {
-    this.addValue(8)
-  }
-
-  onPressButton7() {
-    this.addValue(7)
-  }
-
-  onPressButton6() {
-    this.addValue(6)
-  }
-
-  onPressButton5() {
-    this.addValue(5)
-  }
-
-  onPressButton4() {
-    this.addValue(4)
-  }
-
-  onPressButton3() {
-    this.addValue(3)
-  }
-
-  onPressButton2() {
-    this.addValue(2)
-  }
-
-  onPressButton1() {
-    this.addValue(1)
-  }
-
-  onPressButton0() {
-    this.addValue(0)
-  }
-
-  onPressButton00() {
-    this.addValue(0)
-    this.addValue(0)
   }
 
   onPressButtonClear() {
