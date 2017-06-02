@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  TextInput,
   View,
   Text,
   Platform,
@@ -18,8 +17,8 @@ import OperationDivide from './calculation/OperationDivide'
 export default class CalculatorScreen extends Component {
 
   constructor(props) {
-    super(props)
-    this.calc = new Calculation()
+    super(props);
+    this.calc = new Calculation();
     this.state = {
          text: this.calc.text
       }
@@ -133,7 +132,7 @@ export default class CalculatorScreen extends Component {
             <TouchableHighlight style={styles.buttonLeft}
                 underlayColor='#99d9f4'
                 onPress={() => {
-                  this.onPressNumberButton(0)
+                  this.onPressNumberButton(0);
                   this.onPressNumberButton(0)
                 }}
                 >
@@ -162,52 +161,52 @@ export default class CalculatorScreen extends Component {
   }
 
   onPressNumberButton(number) {
-    this.calc.addValue(number)
+    this.calc.addValue(number);
     this.setState({text: this.calc.text})
   }
 
   onPressButtonClear() {
-    this.calc.clear()
+    this.calc.clear();
     this.setState({text: this.calc.text})
   }
 
   onPressRemoveLast() {
-    this.calc.removeLast()
+    this.calc.removeLast();
     this.setState({text: this.calc.text})
   }
 
   onPressButtonAddition() {
-    this.calc.setOperand(new OperationAddition())
+    this.calc.setOperand(new OperationAddition());
     this.setState({text: this.calc.text})
   }
 
   onPressButtonSub() {
-    this.calc.setOperand(new OperationSub())
+    this.calc.setOperand(new OperationSub());
     this.setState({text: this.calc.text})
   }
 
   onPressButtonMultiplication() {
-    this.calc.setOperand(new OperationMultiplication())
+    this.calc.setOperand(new OperationMultiplication());
     this.setState({text: this.calc.text})
   }
 
   onPressButtonDivide() {
-    this.calc.setOperand(new OperationDivide())
+    this.calc.setOperand(new OperationDivide());
     this.setState({text: this.calc.text})
   }
 
   onPressButtonPercent() {
-    this.calc.definePercent()
+    this.calc.definePercent();
     this.setState({text: this.calc.text})
   }
 
   onPressButtonPoint() {
-    this.calc.addPointToValue()
+    this.calc.addPointToValue();
     this.setState({text: this.calc.text})
   }
 
   onPressButtonCountResult() {
-    this.calc.countResult()
+    this.calc.countResult();
     this.setState({text: this.calc.text})
   }
 

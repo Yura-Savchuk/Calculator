@@ -1,7 +1,5 @@
 import React from "react"
 import Operand from './Operand'
-import Calculation from './Calculation'
-import Value from './Value'
 
 export default class OperationDivide extends Operand {
 
